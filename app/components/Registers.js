@@ -14,11 +14,9 @@ constructor(props) {
   }
   validate = (text) => {
     console.log(text);
-    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-    if (reg.test(text) === false) {
+    let reg = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (!reg.test(text)) {
       console.log("Email is Not Correct");
-      this.setState({ email: text })
-      return false;
     }
     else {
       this.setState({ email: text })
@@ -27,12 +25,13 @@ constructor(props) {
   }
   onRegister(){
     const {email,password,confirmPassword}=this.state;
-        if(this.state.password != this.state.confirmPassword){
-            Alert.alert('password is not march');
-        }
-        else if ((this.state.email==='') || (this.state.password === '')) {
+
+        if ((this.state.email==='') && (this.state.password === '')) {
           Alert.alert('Email or Password is not empty');
         }
+        else if(this.state.password != this.state.confirmPassword){
+            Alert.alert('password is not march');
+           }
         else{
           Alert.alert('YOUR Credential',`Your Email: ${email}\nYour Password is: ${password}`);
         }
@@ -44,7 +43,7 @@ constructor(props) {
       <View style={styles.registers}>
         <Text style={styles.header}>Registers</Text>
         <TextInput style={styles.input}
-            onChangeText={(text)=>this.validate({text})}
+            onChangeText={(email)=>this.setState({email})}
             placeholder="Email" underlineColorAndroid={'transparent'}
             value={this.state.email}
         />
