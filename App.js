@@ -23,17 +23,20 @@ export default class App extends Component {
               //     })
               //     }
               // </ScrollView>
-              <FlatList 
-                data={products} 
-                renderItem={prop =>{
-                // console.log(prop.item.title)
-                <Product 
-                  key={prop.item.id} 
-                  id={prop.item.id}
-                  title={prop.item.title} 
-                  description={prop.item.description}  
-                  image={prop.item.thumbnail} />
-              }}
+              <FlatList
+                data={products}
+                renderItem={prop => {
+                  // console.log('======>', JSON.stringify(prop));
+                  const {item: product} = prop;
+                  return (
+                    <Product
+                      key={product.id}
+                      title={product.title}
+                      description={product.description}
+                      image={product.thumbnail}
+                    />
+                  );
+                }}
               />
           );
        };
@@ -49,10 +52,10 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex:1,
-//     justifyContent:'center',
-//     backgroundColor:'#5D6D7E',
-//     paddingLeft:60,
-//     paddingRight:60,
+    // justifyContent:'center',
+    // backgroundColor:'#5D6D7E',
+    // paddingLeft:60,
+    // paddingRight:60,
   },
 
 });
